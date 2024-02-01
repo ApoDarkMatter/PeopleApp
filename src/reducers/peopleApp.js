@@ -1,0 +1,42 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = { 
+    darkMode: true,
+    isLoading: false,
+    allPeople: {},
+    numPage: 1,
+    searchField: "",
+    searchParam: "name",
+    searchResult: {},
+}
+
+export const peopleApp = createSlice({
+    name: "people",
+    initialState: initialState,
+    reducers: {
+      setDarkMode: (state,action) => {
+        state.darkMode = action.payload
+      },
+      setIsLoading: (state,action) => {
+        state.isLoading = action.payload
+      },
+      setAllPeople: (state,action) => {
+        state.allPeople = action.payload
+      },
+      setNumPage: (state,action) => {
+        state.numPage = action.payload
+      },
+      setSearchField: (state,action) => {
+        state.searchField = action.payload
+      },
+      setSearchParam: (state,action) => {
+        state.searchParam = action.payload
+      },
+      setSearchResult: (state,action) => {
+        state.searchResult = state.allPeople.filter((person) => person.state.selectedSearchParam.toLowerCase().includes(action.payload.toLowerCase()))
+      }
+  }});
+  
+  export const { setDarkMode, setIsLoading, setAllPeople, setNumPage, setSearchField, setSearchParam, setsearchResult } = peopleApp.actions;
+  
+  export default peopleApp.reducer;
