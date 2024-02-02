@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = { 
     darkMode: true,
     isLoading: false,
-    allPeople: {},
+    allPeople: [],
     numPage: 1,
     searchField: "",
     searchParam: "name",
-    searchResult: {},
+    searchResult: [],
 }
 
 export const peopleApp = createSlice({
@@ -22,6 +22,7 @@ export const peopleApp = createSlice({
       },
       setAllPeople: (state,action) => {
         state.allPeople = action.payload
+        console.log(state.allPeople);
       },
       setNumPage: (state,action) => {
         state.numPage = action.payload
@@ -33,10 +34,10 @@ export const peopleApp = createSlice({
         state.searchParam = action.payload
       },
       setSearchResult: (state,action) => {
-        state.searchResult = state.allPeople.filter((person) => person.state.selectedSearchParam.toLowerCase().includes(action.payload.toLowerCase()))
+        state.searchResult = state.allPeople.filter((person) => person.name.first.toLowerCase().includes(action.payload.toLowerCase()))
       }
   }});
   
-  export const { setDarkMode, setIsLoading, setAllPeople, setNumPage, setSearchField, setSearchParam, setsearchResult } = peopleApp.actions;
+  export const { setDarkMode, setIsLoading, setAllPeople, setNumPage, setSearchField, setSearchParam, setSearchResult } = peopleApp.actions;
   
   export default peopleApp.reducer;

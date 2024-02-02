@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import SinglePersonCard from './SinglePersonCard';
 import { nanoid } from 'nanoid';
 import { Col, Row } from 'react-bootstrap';
-import { setAllPeople, setNumPage } from '../../reducers/peopleApp';
+import { setAllPeople, setNumPage, setSearchResult } from '../../reducers/peopleApp';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
 
 const MainAllPeople = () => {
 
@@ -33,37 +32,36 @@ const MainAllPeople = () => {
 
   useEffect(() => {
       getAllPeople()
+      console.log(searchResult);
   },[])
 
-  return (
-    <>
-        <p>This is main!</p>
-
-        <InfiniteScroll
-          dataLength={numPage+1} //This is important field to render the next data
-          next={getAllPeople}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-          scrollThreshold={1}
-          endMessage={
-            <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
-
-        >
-          {<Row>
-            {allPeopleList.map((person) => {
-            return (
-              <Col xl={2} md={3} sm={12} key={nanoid()}>
-                <SinglePersonCard props={person}/>
-              </Col>
-            )
-            })}
-          </Row>}
-        </InfiniteScroll>
-    </>
-  )
+    return (
+      <>
+          <InfiniteScroll
+            dataLength={numPage+1} //This is important field to render the next data
+            next={getAllPeople}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+            scrollThreshold={1}
+            endMessage={
+              <p style={{ textAlign: 'center' }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+  
+          >
+            {<Row>
+              {searchResult.map((person) => {
+              return (
+                <Col xl={2} md={3} sm={12} key={nanoid()}>
+                  <SinglePersonCard props={person}/>
+                </Col>
+              )
+              })}
+            </Row>}
+          </InfiniteScroll>
+      </>
+    )
 }
 
 export default MainAllPeople
