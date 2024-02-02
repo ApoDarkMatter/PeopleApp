@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import SinglePersonCard from './SinglePersonCard';
 import { nanoid } from 'nanoid';
@@ -16,15 +16,12 @@ const MainAllPeople = () => {
   const allPeople = useSelector((state) => state.people.allPeople)
 
   const dispatch = useDispatch()
-
-  const [allPeopleList, setAllPeopleList] = useState([])
   
   const getAllPeople = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/?page=${numPage}&results=50&seed=abc`)
       const people = response.data.results
-      setAllPeopleList(allPeopleList.concat(people))
-      dispatch(setAllPeople(allPeopleList.concat(people)))
+      dispatch(setAllPeople(people))
       dispatch(setNumPage(numPage+1))
     } catch (error) {
       console.log(error);
@@ -55,7 +52,7 @@ const MainAllPeople = () => {
               }
     
             >
-              {<Row>
+              {<Row className="bg-lightblue">
                 {allPeople.map((person) => {
                 return (
                   <Col xl={2} md={3} sm={12} key={nanoid()}>
@@ -70,7 +67,7 @@ const MainAllPeople = () => {
     } else {
       return (
         <>
-          {<Row>
+          {<Row className="bg-lightblue">
             {searchResult.map((person) => {
             return (
               <Col xl={2} md={3} sm={12} key={nanoid()}>

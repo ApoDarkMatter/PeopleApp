@@ -21,7 +21,7 @@ export const peopleApp = createSlice({
         state.isLoading = action.payload
       },
       setAllPeople: (state,action) => {
-        state.allPeople = action.payload
+        state.allPeople = [...state.allPeople,...action.payload]
       },
       setNumPage: (state,action) => {
         state.numPage = action.payload
