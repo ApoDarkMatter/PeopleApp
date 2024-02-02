@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSearchField } from '../../reducers/peopleApp';
+import { useDispatch } from 'react-redux';
+import { setSearchField, setSearchResult } from '../../reducers/peopleApp';
 
 const Header = () => {
 
@@ -14,11 +13,12 @@ const Header = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(setSearchField(searchInputValue))
-    }, 250)
-
-    return () => clearTimeout(timer)
+      const timer = setTimeout(() => {
+        dispatch(setSearchResult(searchInputValue))
+        dispatch(setSearchField(searchInputValue))
+      }, 250)
+  
+      return () => clearTimeout(timer)
     
   }, [searchInputValue])
 
@@ -44,7 +44,6 @@ const Header = () => {
               aria-label="Search"
               onChange= {(e) => setSearchInputValue(e.target.value)}
             />
-            <Button variant="outline-success">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

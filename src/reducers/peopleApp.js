@@ -5,8 +5,8 @@ const initialState = {
     isLoading: false,
     allPeople: [],
     numPage: 1,
-    searchField: "",
     searchParam: "name",
+    searchSearchField: "",
     searchResult: [],
 }
 
@@ -27,11 +27,11 @@ export const peopleApp = createSlice({
       setNumPage: (state,action) => {
         state.numPage = action.payload
       },
-      setSearchField: (state,action) => {
-        state.searchField = action.payload
-      },
       setSearchParam: (state,action) => {
         state.searchParam = action.payload
+      },
+      setSearchField: (state,action) => {
+        state.searchField = action.payload
       },
       setSearchResult: (state,action) => {
         state.searchResult = state.allPeople.filter((person) => person.name.first.toLowerCase().includes(action.payload.toLowerCase()))

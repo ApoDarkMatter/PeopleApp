@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SinglePersonCard from './SinglePersonCard';
 import { nanoid } from 'nanoid';
 import { Col, Row } from 'react-bootstrap';
-import { setAllPeople, setNumPage, setSearchResult } from '../../reducers/peopleApp';
+import { setAllPeople, setNumPage, setSearchField, setSearchResult } from '../../reducers/peopleApp';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const MainAllPeople = () => {
@@ -12,6 +12,7 @@ const MainAllPeople = () => {
   const numPage = useSelector((state) => state.people.numPage)
 
   const searchResult = useSelector((state) => state.people.searchResult)
+  const searchField = useSelector((state) => state.people.searchField)
   const allPeople = useSelector((state) => state.people.allPeople)
 
   const dispatch = useDispatch()
@@ -31,37 +32,57 @@ const MainAllPeople = () => {
   }
 
   useEffect(() => {
-      getAllPeople()
-      console.log(searchResult);
+    getAllPeople()
   },[])
 
-    return (
-      <>
-          <InfiniteScroll
-            dataLength={numPage+1} //This is important field to render the next data
-            next={getAllPeople}
-            hasMore={true}
-            loader={<h4>Loading...</h4>}
-            scrollThreshold={1}
-            endMessage={
-              <p style={{ textAlign: 'center' }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }
-  
-          >
-            {<Row>
-              {searchResult.map((person) => {
-              return (
-                <Col xl={2} md={3} sm={12} key={nanoid()}>
-                  <SinglePersonCard props={person}/>
-                </Col>
-              )
-              })}
-            </Row>}
-          </InfiniteScroll>
-      </>
-    )
+  useEffect(() => {
+    console.log(searchResult);
+  },[searchField])
+
+    if(!searchField) {
+      return (
+        <>
+            <InfiniteScroll
+              dataLength={numPage+1} //This is important field to render the next data
+              next={getAllPeople}
+              hasMore={true}
+              loader={<h4>Loading...</h4>}
+              scrollThreshold={1}
+              endMessage={
+                <p style={{ textAlign: 'center' }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+    
+            >
+              {<Row>
+                {allPeople.map((person) => {
+                return (
+                  <Col xl={2} md={3} sm={12} key={nanoid()}>
+                    <SinglePersonCard props={person}/>
+                  </Col>
+                )
+                })}
+              </Row>}
+            </InfiniteScroll>
+        </>
+      )
+    } else {
+      return (
+        <>
+          {<Row>
+            {searchResult.map((person) => {
+            return (
+              <Col xl={2} md={3} sm={12} key={nanoid()}>
+                <SinglePersonCard props={person}/>
+              </Col>
+            )
+            })}
+          </Row>}
+        </>
+      )
+    }
+    
 }
 
 export default MainAllPeople
