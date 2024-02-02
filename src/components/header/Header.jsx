@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch } from 'react-redux';
 import { setSearchField, setSearchResult } from '../../reducers/peopleApp';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -33,7 +34,7 @@ const Header = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="/">Home</Nav.Link>
+            <Link to={`./`}>Home</Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
