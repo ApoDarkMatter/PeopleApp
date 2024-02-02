@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SinglePersonCard from './SinglePersonCard';
 import { nanoid } from 'nanoid';
 import { Col, Row } from 'react-bootstrap';
-import { setAllPeople, setNumPage, setSearchField, setSearchResult } from '../../reducers/peopleApp';
+import { setAllPeople, setNumPage } from '../../reducers/peopleApp';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const MainAllPeople = () => {
@@ -36,7 +36,7 @@ const MainAllPeople = () => {
   },[])
 
   useEffect(() => {
-    console.log(searchResult);
+    
   },[searchField])
 
     if(!searchField) {

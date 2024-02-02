@@ -22,7 +22,6 @@ export const peopleApp = createSlice({
       },
       setAllPeople: (state,action) => {
         state.allPeople = action.payload
-        console.log(state.allPeople);
       },
       setNumPage: (state,action) => {
         state.numPage = action.payload
