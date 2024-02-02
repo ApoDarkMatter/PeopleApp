@@ -40,7 +40,7 @@ const MainAllPeople = () => {
       return (
         <>
             <InfiniteScroll
-              dataLength={numPage+1} //This is important field to render the next data
+              dataLength={numPage} //This is important field to render the next data
               next={getAllPeople}
               hasMore={true}
               loader={<h4>Loading...</h4>}

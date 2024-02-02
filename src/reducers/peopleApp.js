@@ -33,7 +33,17 @@ export const peopleApp = createSlice({
         state.searchField = action.payload
       },
       setSearchResult: (state,action) => {
+        //state.searchResult = state.allPeople.filter((person) => person.name.first.toLowerCase().includes(action.payload.toLowerCase()))
+        //state.searchResult = action.payload
         state.searchResult = state.allPeople.filter((person) => person.name.first.toLowerCase().includes(action.payload.toLowerCase()))
+
+        /* const filteredUsers = users.filter(
+          (user) =>
+            (action.payload.gender === "all" || person.gender === action.payload.gender.gender) &&
+            (action.payload.nationality === "all" || person.nat === action.payload.nationality) &&
+            (user.name.first.toLowerCase().includes(filter.name.toLowerCase()) ||
+              user.name.last.toLowerCase().includes(filter.name.toLowerCase()))
+        ); */
       }
   }});
   

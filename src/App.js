@@ -8,6 +8,7 @@ import DetailPage from './views/detail/DetailPage';
 function App() {
   return (
     <Router>
+      <Header/>
       <Routes>
         <Route exath path="/" element={<HomePage />}/>
         <Route path="/detail/:id" element={<DetailPage />}/>
