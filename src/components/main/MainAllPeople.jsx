@@ -48,7 +48,8 @@ const MainAllPeople = () => {
               }
             >
               {<Row className="margin">
-                {allPeople.map((person) => {
+                {
+                allPeople.map((person) => {
                   return (
                     <Col xl={2} md={3} sm={12} key={nanoid()}>
                       <SinglePersonCard props={person}/>

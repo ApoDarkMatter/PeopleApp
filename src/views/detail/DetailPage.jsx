@@ -59,7 +59,6 @@ const DetailPage = () => {
         </MDBContainer>
       </div>
     </>
-
   )
 }
 
