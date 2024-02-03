@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Form } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { setSearchField, setSearchResult } from '../../reducers/peopleApp'
+import { setSearchResult } from '../../reducers/peopleApp'
 
 const SearchBy = () => {
 
@@ -16,7 +16,6 @@ const SearchBy = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
           dispatch(setSearchResult(filter))
-          dispatch(setSearchField(filter))
         }, 250)
     
         return () => clearTimeout(timer)
