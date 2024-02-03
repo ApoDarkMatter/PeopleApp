@@ -5,45 +5,49 @@ import { setSearchField, setSearchResult } from '../../reducers/peopleApp'
 
 const SearchBy = () => {
 
-    const [searchInputValue, setSearchInputValue] = useState("")
-    const [searchSelectGender, setSelectGender] = useState("")
-    const [searchSelectNation, setSelectNation] = useState("")
+    const [searchSelectName, setSearchSelectName] = useState("")
+    const [searchSelectGender, setSearchSelectGender] = useState("all")
+    const [searchSelectNation, setSearchSelectNation] = useState("all")
+
+    let filter = {searchSelectName,searchSelectGender,searchSelectNation}
 
     const dispatch = useDispatch()
   
     useEffect(() => {
         const timer = setTimeout(() => {
-          dispatch(setSearchResult(searchInputValue,searchSelectGender,searchSelectNation))
-          dispatch(setSearchField(searchInputValue,searchSelectGender,searchSelectNation))
+          dispatch(setSearchResult(filter))
+          dispatch(setSearchField(filter))
         }, 250)
     
         return () => clearTimeout(timer)
       
-    }, [searchInputValue,searchSelectGender,searchSelectNation])
+    }, [filter])
 
     return (
         <>
             <Row className="searchBar">
+                <h2>SearchBy</h2>
                 <Col xl={4} md={4} sm={12}>
+                    <Form.Label>First Name/Last Name</Form.Label>
                     <Form.Control 
-                        value={searchInputValue}
+                        value={searchSelectName}
                         type="text" 
                         placeholder="Search by name" 
-                        onChange= {(e) => setSearchInputValue(e.target.value)}
+                        onChange= {(e) => setSearchSelectName(e.target.value)}
                     />
                 </Col>
                 <Col xl={4} md={4} sm={12}>
-                    <Form.Select aria-label="Default select example" onChange={(e) => setSelectGender(e.target.value)}>
-                        <option>Gender</option>
-                        <option value="All">All</option>
+                    <Form.Label>Gender</Form.Label>
+                    <Form.Select aria-label="Default select example" onChange={(e) => setSearchSelectGender(e.target.value)}>
+                        <option value="all">All</option>
                         <option value="male">Male</option>
                         <option value="female">Famale</option>
                     </Form.Select>
                 </Col>
                 <Col xl={4} md={4} sm={12}>
-                    <Form.Select aria-label="Default select example" onChange={(e) => setSelectNation(e.target.value)}>
-                        <option>Nation</option>
-                        <option value="All">All</option>
+                    <Form.Label>Nation</Form.Label>
+                    <Form.Select aria-label="Default select example" onChange={(e) => setSearchSelectNation(e.target.value)}>
+                        <option value="all">All</option>
                         <option value="AU">AU</option>
                         <option value="BR">BR</option>
                         <option value="CA">CA</option>

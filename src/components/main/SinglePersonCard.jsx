@@ -12,12 +12,12 @@ import {
 function SinglePersonCard(props) {
   return (
     <>
-        <MDBCard style={{margin:"0.5rem"}}>
+        <MDBCard>
           <MDBCardImage src={props.props.picture.large} position='top' alt='...' />
           <MDBCardBody>
             <MDBCardTitle>{props.props.name.title} {props.props.name.first} {props.props.name.last}</MDBCardTitle>
             <MDBCardText>
-              {props.props.location.city}
+              {props.props.location.city} ({props.props.nat})
             </MDBCardText>
             <Link to={`./detail/${props.props.login.uuid}`}><MDBBtn>Go to details</MDBBtn></Link>
           </MDBCardBody>

@@ -12,7 +12,7 @@ const MainAllPeople = () => {
   const numPage = useSelector((state) => state.people.numPage)
 
   const searchResult = useSelector((state) => state.people.searchResult)
-  const searchField = useSelector((state) => state.people.searchField)
+  const filterBy = useSelector((state) => state.people.filterBy)
   const allPeople = useSelector((state) => state.people.allPeople)
 
   const dispatch = useDispatch()
@@ -32,15 +32,11 @@ const MainAllPeople = () => {
     getAllPeople()
   },[])
 
-  useEffect(() => {
-    
-  },[searchField])
-
-    if(!searchField) {
+    if(filterBy.searchSelectName === "" && filterBy.searchSelectGender === "all" && filterBy.searchSelectNation === "all" ) {
       return (
         <>
             <InfiniteScroll
-              dataLength={numPage} //This is important field to render the next data
+              dataLength={numPage+1}
               next={getAllPeople}
               hasMore={true}
               loader={<h4>Loading...</h4>}
@@ -50,16 +46,15 @@ const MainAllPeople = () => {
                   <b>Yay! You have seen it all</b>
                 </p>
               }
-    
             >
-              {<Row className="bg-lightblue">
+              {<Row className="margin">
                 {allPeople.map((person) => {
-                return (
-                  <Col xl={2} md={3} sm={12} key={nanoid()}>
-                    <SinglePersonCard props={person}/>
-                  </Col>
-                )
-                })}
+                  return (
+                    <Col xl={2} md={3} sm={12} key={nanoid()}>
+                      <SinglePersonCard props={person}/>
+                    </Col>
+                  )
+                  })}
               </Row>}
             </InfiniteScroll>
         </>
@@ -67,14 +62,14 @@ const MainAllPeople = () => {
     } else {
       return (
         <>
-          {<Row className="bg-lightblue">
+          {<Row className="margin">
             {searchResult.map((person) => {
-            return (
-              <Col xl={2} md={3} sm={12} key={nanoid()}>
-                <SinglePersonCard props={person}/>
-              </Col>
-            )
-            })}
+              return (
+                <Col xl={2} md={3} sm={12} key={nanoid()}>
+                  <SinglePersonCard props={person}/>
+                </Col>
+              )
+              })}
           </Row>}
         </>
       )

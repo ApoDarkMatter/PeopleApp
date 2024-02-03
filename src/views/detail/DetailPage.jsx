@@ -1,16 +1,13 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography } from 'mdb-react-ui-kit';
 import { useSelector } from 'react-redux';
 
 const DetailPage = () => {
 
   const { id } = useParams()
-  const allPeople = useSelector((state) => state.people.allPeople)
   
   const user = useSelector((state) => state.people.allPeople.find((user) => user.login.uuid === id))
-
-  console.log(user);
 
   return (
     <>

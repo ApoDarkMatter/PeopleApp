@@ -1,6 +1,17 @@
-.bg-lightblue {
+#root, html {
     background-color: #9DE2FF;
-}
+} 
 .searchBar {
+    background-color: white;
     padding: 2rem;
+    margin-right: 0px !important;
+    margin-left: 0px  !important;
+}
+h4 {
+    text-align: center;
+}
+.margin {
+    padding-top: 1rem;
+    margin-right: 0px !important;
+    margin-left: 0px  !important;
 }
