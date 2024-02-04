@@ -8,7 +8,6 @@ import {
   MDBCardImage,
   MDBBtn
 } from 'mdb-react-ui-kit';
-import { Row } from 'react-bootstrap';
 
 function SinglePersonCard(props) {
   return (
