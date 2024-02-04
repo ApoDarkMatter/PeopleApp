@@ -10,7 +10,6 @@ import {
 } from 'mdb-react-ui-kit';
 
 function SinglePersonCard(props) {
-  console.log(props);
   return (
     <>
         <MDBCard>

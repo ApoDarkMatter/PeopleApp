@@ -3,9 +3,8 @@ import axios from "axios";
 
 // Thunk to get all user
 export const getUsers = createAsyncThunk("users/getUsers", async (page = 1) => {
-  const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/?page=${page}&results=50&seed=abc`);
+  const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/?page=${page}&results=50&seed=123`);
   return response.data.results;
-
 });
 
 const initialState = { 
@@ -21,16 +20,12 @@ const initialState = {
   searchResult: [],
 }
 
-export const peopleApp = createSlice({
+const peopleApp = createSlice({
     name: "users",
     initialState: initialState,
     reducers: {
       setIsLoading: (state,action) => {
         state.isLoading = action.payload
-      },
-      setSearchResult: (state,action) => {
-        state.filterBy = action.payload
-        state.searchResult = state.users.filter((person) => (state.filterBy.searchSelectGender === "all" || person.gender === state.filterBy.searchSelectGender) && (state.filterBy.searchSelectNation === "all" || person.nat === state.filterBy.searchSelectNation) && (person.name.first.toLowerCase().includes(state.filterBy.searchSelectName.toLowerCase()) || person.name.last.toLowerCase().includes(state.filterBy.searchSelectName.toLowerCase())))
       },
       setGender(state, action) {
         state.filter.gender = action.payload;
@@ -41,6 +36,10 @@ export const peopleApp = createSlice({
       setName(state, action) {
         state.filter.name = action.payload;
       },
+      setSerachResult(state, action) {
+        state.searchResult = action.payload;
+      },
+    },
       extraReducers(builder) {
         builder
           .addCase(getUsers.pending, (state, action) => {
@@ -48,7 +47,7 @@ export const peopleApp = createSlice({
           })
           .addCase(getUsers.fulfilled, (state, action) => {
             state.status = "succeeded";
-            state.users = [...state.users,...action.payload];
+            state.users = [...state.users, ...action.payload];
             state.error = null;
           })
           .addCase(getUsers.rejected, (state, action) => {
@@ -56,8 +55,8 @@ export const peopleApp = createSlice({
             state.error = action.error.message;
           });
       },
-  }});
+  });
   
-  export const { setIsLoading, setNumPage, setSearchResult } = peopleApp.actions;
+  export const { setIsLoading, setNumPage, setName, setNationality, setGender, setSerachResult } = peopleApp.actions;
   
   export default peopleApp.reducer;

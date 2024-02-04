@@ -10,7 +10,8 @@ const MainAllPeople = () => {
 
   const dispatch = useDispatch()
 
-  const {filter, users} = useSelector((state) => state.people)
+  const filter = useSelector((state) => state.people.filter)
+  const users = useSelector((state) => state.people.users)
 
   const [page, setPage] = useState(1)
 
@@ -30,29 +31,47 @@ const MainAllPeople = () => {
         user.name.last.toLowerCase().includes(filter.name.toLowerCase()))
   );
 
-  return (
-    <>
-        <InfiniteScroll
-          dataLength={filteredUsers.length}
-          next={fetchData}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-          scrollThreshold={1}
-        >
-          {<Row className="margin">
-            {
-            filteredUsers.map((user) => {
-              return (
-                <Col xl={2} md={3} sm={12} key={nanoid()}>
-                  <SinglePersonCard props={user}/>
-                </Col>
-              )
-              })}
-          </Row>
-          }
-        </InfiniteScroll>
-    </>
-  )
+  if(filter.gender === "all" && filter.nationality === "all" && filter.name === "") {
+    return (
+      <>
+          <InfiniteScroll
+            dataLength={users.length}
+            next={fetchData}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+            scrollThreshold={1}
+          >
+            {<Row className="margin">
+              {users.map((user) => {
+                return (
+                  <Col xl={2} md={3} sm={12} key={nanoid()}>
+                    <SinglePersonCard props={user}/>
+                  </Col>
+                )
+                })}
+            </Row>
+            }
+          </InfiniteScroll>
+      </>
+    )
+  } else {
+    return (
+      <>
+      {<Row className="margin">
+        {filteredUsers.map((user) => {
+          return (
+            <Col xl={2} md={3} sm={12} key={nanoid()}>
+              <SinglePersonCard props={user}/>
+            </Col>
+          )
+          })}
+        </Row>
+      }
+      </>
+    )
+    
+  }
+  
 }
 
 export default MainAllPeople

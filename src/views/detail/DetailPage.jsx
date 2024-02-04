@@ -7,7 +7,7 @@ const DetailPage = () => {
 
   const { id } = useParams()
   
-  const user = useSelector((state) => state.people.allPeople.find((user) => user.login.uuid === id))
+  const user = useSelector((state) => state.people.users.find((user) => user.login.uuid === id))
 
   return (
     <>

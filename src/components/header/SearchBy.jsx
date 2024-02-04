@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Form } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { setSearchResult } from '../../reducers/peopleApp'
+import { setGender, setName, setNationality } from '../../reducers/peopleApp'
 
 const SearchBy = () => {
 
@@ -9,18 +9,18 @@ const SearchBy = () => {
     const [searchSelectGender, setSearchSelectGender] = useState("all")
     const [searchSelectNation, setSearchSelectNation] = useState("all")
 
-    let filter = {searchSelectName,searchSelectGender,searchSelectNation}
-
     const dispatch = useDispatch()
   
     useEffect(() => {
         const timer = setTimeout(() => {
-          dispatch(setSearchResult(filter))
+          dispatch(setGender(searchSelectGender))
+          dispatch(setName(searchSelectName))
+          dispatch(setNationality(searchSelectNation))
         }, 250)
     
         return () => clearTimeout(timer)
       
-    }, [filter])
+    }, [searchSelectName,searchSelectGender,searchSelectNation,dispatch])
 
     return (
         <>
@@ -40,7 +40,7 @@ const SearchBy = () => {
                     <Form.Select aria-label="Default select example" onChange={(e) => setSearchSelectGender(e.target.value)}>
                         <option value="all">All</option>
                         <option value="male">Male</option>
-                        <option value="female">Famale</option>
+                        <option value="female">Female</option>
                     </Form.Select>
                 </Col>
                 <Col xl={4} md={4} sm={12}>
