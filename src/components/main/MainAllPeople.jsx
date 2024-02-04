@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid';
 import { Col, Row } from 'react-bootstrap';
 import { getUsers } from '../../reducers/peopleApp';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { ThreeDots } from 'react-loader-spinner';
 
 const MainAllPeople = () => {
 
@@ -16,8 +17,8 @@ const MainAllPeople = () => {
   const [page, setPage] = useState(1)
 
   useEffect(() => {
-    dispatch(getUsers(page));
-  }, [dispatch, page]);
+      dispatch(getUsers(page));
+  }, [dispatch,page]);
 
   const fetchData = () => {
     setPage(page + 1);
@@ -38,7 +39,15 @@ const MainAllPeople = () => {
             dataLength={users.length}
             next={fetchData}
             hasMore={true}
-            loader={<h4>Loading...</h4>}
+            loader={<ThreeDots
+                      visible={true}
+                      height="80"
+                      width="80"
+                      color="#2B3035"
+                      radius="9"
+                      ariaLabel="three-dots-loading"
+                      wrapperClass="loadingSpinner"
+                    />}
             scrollThreshold={1}
           >
             {<Row className="margin">

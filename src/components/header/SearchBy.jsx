@@ -1,51 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import { Col, Row, Form } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { Col, Row, Form, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 import { setGender, setName, setNationality } from '../../reducers/peopleApp'
 
 const SearchBy = () => {
 
-    const [searchSelectName, setSearchSelectName] = useState("")
-    const [searchSelectGender, setSearchSelectGender] = useState("all")
-    const [searchSelectNation, setSearchSelectNation] = useState("all")
-
     const dispatch = useDispatch()
+
+    const resetFilter = () => {
+        dispatch(setName(""))
+        dispatch(setGender("all"))
+        dispatch(setNationality("all"))
+    }
+
+    const filter = useSelector((state) => state.people.filter)
   
     useEffect(() => {
-        const timer = setTimeout(() => {
-          dispatch(setGender(searchSelectGender))
-          dispatch(setName(searchSelectName))
-          dispatch(setNationality(searchSelectNation))
-        }, 250)
-    
-        return () => clearTimeout(timer)
-      
-    }, [searchSelectName,searchSelectGender,searchSelectNation,dispatch])
+
+    }, [dispatch])
 
     return (
         <>
             <Row className="searchBar">
                 <h2>SearchBy</h2>
-                <Col xl={4} md={4} sm={12}>
+                <Col xl={3} md={3} sm={12}>
                     <Form.Label>First Name/Last Name</Form.Label>
                     <Form.Control 
-                        value={searchSelectName}
+                        value={filter.name}
                         type="text" 
                         placeholder="Search by name" 
-                        onChange= {(e) => setSearchSelectName(e.target.value)}
+                        onChange= {(e) => dispatch(setName(e.target.value))}
                     />
                 </Col>
-                <Col xl={4} md={4} sm={12}>
+                <Col xl={3} md={3} sm={12}>
                     <Form.Label>Gender</Form.Label>
-                    <Form.Select aria-label="Default select example" onChange={(e) => setSearchSelectGender(e.target.value)}>
+                    <Form.Select aria-label="Default select example" value={filter.gender} onChange={(e) => dispatch(setGender(e.target.value))}>
                         <option value="all">All</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </Form.Select>
                 </Col>
-                <Col xl={4} md={4} sm={12}>
+                <Col xl={3} md={3} sm={12}>
                     <Form.Label>Nation</Form.Label>
-                    <Form.Select aria-label="Default select example" onChange={(e) => setSearchSelectNation(e.target.value)}>
+                    <Form.Select aria-label="Default select example" value={filter.nationality} onChange={(e) => dispatch(setNationality(e.target.value))}>
                         <option value="all">All</option>
                         <option value="AU">AU</option>
                         <option value="BR">BR</option>
@@ -69,6 +66,9 @@ const SearchBy = () => {
                         <option value="NA">UA</option>
                         <option value="US">US</option>
                     </Form.Select>
+                </Col>
+                <Col xl={3} md={3} sm={12}>
+                    <Button variant="warning" className="btnReset" onClick={resetFilter}>Reset Filter</Button>
                 </Col>
             </Row>
         </>

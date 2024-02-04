@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Thunk to get all user
-export const getUsers = createAsyncThunk("users/getUsers", async (page = 1) => {
+export const getUsers = createAsyncThunk("users/getUsers", async (page) => {
   const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/?page=${page}&results=50`);
   return response.data.results;
 });
@@ -10,23 +10,18 @@ export const getUsers = createAsyncThunk("users/getUsers", async (page = 1) => {
 const initialState = { 
   status: "idle",
   error: null,
-  isLoading: false,
   users: [],
   filter: {
     gender: "all",
     nationality: "all",
     name: "",
   },
-  searchResult: [],
 }
 
 const peopleApp = createSlice({
     name: "users",
     initialState: initialState,
     reducers: {
-      setIsLoading: (state,action) => {
-        state.isLoading = action.payload
-      },
       setGender(state, action) {
         state.filter.gender = action.payload;
       },
@@ -35,9 +30,6 @@ const peopleApp = createSlice({
       },
       setName(state, action) {
         state.filter.name = action.payload;
-      },
-      setSerachResult(state, action) {
-        state.searchResult = action.payload;
       },
     },
       extraReducers(builder) {
@@ -57,6 +49,6 @@ const peopleApp = createSlice({
       },
   });
   
-  export const { setIsLoading, setNumPage, setName, setNationality, setGender, setSerachResult } = peopleApp.actions;
+  export const { setNumPage, setName, setNationality, setGender, setSerachResult } = peopleApp.actions;
   
   export default peopleApp.reducer;

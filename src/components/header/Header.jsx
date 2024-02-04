@@ -7,19 +7,12 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
+    <Navbar bg="dark" data-bs-theme="dark">
       <Container fluid>
-        <Navbar.Brand href="#">PeopleApp</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            <Link to={`./`}>Home</Link>
-          </Nav>
-        </Navbar.Collapse>
+        <Navbar.Brand>PeopleApp</Navbar.Brand>
+        <Nav className="me-auto">
+          <Link to={`./`}><Nav>Home</Nav></Link>
+        </Nav>
       </Container>
     </Navbar>
   );
