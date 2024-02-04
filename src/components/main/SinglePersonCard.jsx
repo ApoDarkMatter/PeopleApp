@@ -8,6 +8,7 @@ import {
   MDBCardImage,
   MDBBtn
 } from 'mdb-react-ui-kit';
+import { Row } from 'react-bootstrap';
 
 function SinglePersonCard(props) {
   return (
@@ -19,7 +20,7 @@ function SinglePersonCard(props) {
             <MDBCardText>
               {props.props.location.city} ({props.props.nat})
             </MDBCardText>
-            <Link to={`./detail/${props.props.login.uuid}`}><MDBBtn>Go to details</MDBBtn></Link>
+            <Link to={`./detail/${props.props.login.uuid}`}><MDBBtn className="btnCard">Go to details</MDBBtn></Link>
           </MDBCardBody>
         </MDBCard>
     </>

@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Thunk to get all user
 export const getUsers = createAsyncThunk("users/getUsers", async (page = 1) => {
-  const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/?page=${page}&results=50&seed=123`);
+  const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/?page=${page}&results=50`);
   return response.data.results;
 });
 

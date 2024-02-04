@@ -44,7 +44,7 @@ const MainAllPeople = () => {
             {<Row className="margin">
               {users.map((user) => {
                 return (
-                  <Col xl={2} md={3} sm={12} key={nanoid()}>
+                  <Col xl={2} md={3} key={nanoid()}>
                     <SinglePersonCard props={user}/>
                   </Col>
                 )
@@ -57,16 +57,15 @@ const MainAllPeople = () => {
   } else {
     return (
       <>
-      {<Row className="margin">
+      <Row className="margin">
         {filteredUsers.map((user) => {
           return (
-            <Col xl={2} md={3} sm={12} key={nanoid()}>
+            <Col xl={2} md={3} key={nanoid()}>
               <SinglePersonCard props={user}/>
             </Col>
           )
-          })}
-        </Row>
-      }
+        })}
+      </Row>
       </>
     )
     

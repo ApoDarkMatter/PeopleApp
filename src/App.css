@@ -10,8 +10,9 @@
 h4 {
     text-align: center;
 }
-.margin {
-    padding-top: 1rem;
-    margin-right: 0px !important;
-    margin-left: 0px  !important;
+.card {
+    margin: 0.5rem;
+}
+.btnCard {
+    width: 100%;
 }
