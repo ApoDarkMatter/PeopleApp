@@ -7,17 +7,20 @@ const SearchBy = () => {
 
     const dispatch = useDispatch()
 
+    //function to reset all filter value
     const resetFilter = () => {
         dispatch(setName(""))
         dispatch(setGender("all"))
         dispatch(setNationality("all"))
     }
 
+    //call redux state filter
     const filter = useSelector((state) => state.people.filter)
-  
+    
+    //rerender every time filter change
     useEffect(() => {
 
-    }, [dispatch])
+    }, [filter])
 
     return (
         <>

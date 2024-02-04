@@ -11,20 +11,25 @@ const MainAllPeople = () => {
 
   const dispatch = useDispatch()
 
+  //call redux state filter and users
   const filter = useSelector((state) => state.people.filter)
   const users = useSelector((state) => state.people.users)
 
+  //define number page state for infinite scroll
   const [page, setPage] = useState(1)
 
+  //fecthData on first run
   useEffect(() => {
     fetchData();
   }, []);
 
+  //function to fetch data users
   const fetchData = () => {
     dispatch(getUsers(page))
     setPage(page + 1);
   };
 
+  //filter result with selected filter
   const filteredUsers = users.filter(
     (user) =>
       (filter.gender === "all" || user.gender === filter.gender) &&
@@ -33,6 +38,7 @@ const MainAllPeople = () => {
         user.name.last.toLowerCase().includes(filter.name.toLowerCase()))
   );
 
+  //control if filter are standard show all users data else show only filtered data and disable infinite scroll
   if(filter.gender === "all" && filter.nationality === "all" && filter.name === "") {
     return (
       <>
@@ -67,15 +73,15 @@ const MainAllPeople = () => {
   } else {
     return (
       <>
-      <Row className="margin">
-        {filteredUsers.map((user) => {
-          return (
-            <Col xl={2} md={3} key={nanoid()}>
-              <SinglePersonCard props={user}/>
-            </Col>
-          )
-        })}
-      </Row>
+        <Row className="margin">
+          {filteredUsers.map((user) => {
+            return (
+              <Col xl={2} md={3} key={nanoid()}>
+                <SinglePersonCard props={user}/>
+              </Col>
+            )
+          })}
+        </Row>
       </>
     )
     

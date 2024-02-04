@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux';
 
 const DetailPage = () => {
 
+  //read id params from url
   const { id } = useParams()
   
+  //call user redux state and filter to find only the one with correct id
   const user = useSelector((state) => state.people.users.find((user) => user.login.uuid === id))
 
   return (

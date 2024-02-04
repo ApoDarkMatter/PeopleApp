@@ -7,6 +7,7 @@ export const getUsers = createAsyncThunk("users/getUsers", async (page) => {
   return response.data.results;
 });
 
+//set initial state
 const initialState = { 
   status: "idle",
   error: null,
@@ -18,6 +19,7 @@ const initialState = {
   },
 }
 
+//set reducers and extra reducers
 const peopleApp = createSlice({
     name: "users",
     initialState: initialState,
@@ -49,6 +51,6 @@ const peopleApp = createSlice({
       },
   });
   
-  export const { setNumPage, setName, setNationality, setGender } = peopleApp.actions;
+  export const { setName, setNationality, setGender } = peopleApp.actions;
   
   export default peopleApp.reducer;
