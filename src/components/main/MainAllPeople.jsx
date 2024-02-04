@@ -17,10 +17,11 @@ const MainAllPeople = () => {
   const [page, setPage] = useState(1)
 
   useEffect(() => {
-      dispatch(getUsers(page));
-  }, [dispatch,page]);
+    fetchData();
+  }, []);
 
   const fetchData = () => {
+    dispatch(getUsers(page))
     setPage(page + 1);
   };
 

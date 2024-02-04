@@ -49,6 +49,6 @@ const peopleApp = createSlice({
       },
   });
   
-  export const { setNumPage, setName, setNationality, setGender, setSerachResult } = peopleApp.actions;
+  export const { setNumPage, setName, setNationality, setGender } = peopleApp.actions;
   
   export default peopleApp.reducer;
