@@ -17,19 +17,21 @@ const MainAllPeople = () => {
   const filteredResult = useSelector((state) => state.people.filteredResult)
 
   //define number page state for infinite scroll
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
 
   //fecthData on first run
   useEffect(() => {
-    fetchData();
+    if(users.length === 0) {
+      dispatch(getUsers(page))
+    }
   }, []);
 
   //function to fetch data users
   const fetchData = () => {
-    dispatch(getUsers(page))
     setPage(page + 1);
+    dispatch(getUsers(page))
   };
-
+  
   //control if filter are standard show all users data else show only filtered data and disable infinite scroll
   if(filter.gender === "all" && filter.nationality === "all" && filter.name === "") {
     return (
