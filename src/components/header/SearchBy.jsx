@@ -66,7 +66,7 @@ const SearchBy = () => {
                         <option value="NZ">NZ</option>
                         <option value="RS">RS</option>
                         <option value="TR">TR</option>
-                        <option value="NA">UA</option>
+                        <option value="UA">UA</option>
                         <option value="US">US</option>
                     </Form.Select>
                 </Col>
