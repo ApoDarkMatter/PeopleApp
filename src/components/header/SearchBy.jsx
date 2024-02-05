@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Col, Row, Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { setGender, setName, setNationality } from '../../reducers/peopleApp'
+import { setFilteredResult, setGender, setName, setNationality } from '../../reducers/peopleApp'
 
 const SearchBy = () => {
 
@@ -19,7 +19,7 @@ const SearchBy = () => {
     
     //rerender every time filter change
     useEffect(() => {
-
+        dispatch(setFilteredResult())
     }, [filter])
 
     return (

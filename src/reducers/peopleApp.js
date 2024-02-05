@@ -12,6 +12,7 @@ const initialState = {
   status: "idle",
   error: null,
   users: [],
+  filteredResult: [],
   filter: {
     gender: "all",
     nationality: "all",
@@ -33,6 +34,13 @@ const peopleApp = createSlice({
       setName(state, action) {
         state.filter.name = action.payload;
       },
+      setFilteredResult(state, action) {
+        state.filteredResult = state.users.filter((user) =>
+                                                    (state.filter.gender === "all" || user.gender === state.filter.gender) &&
+                                                    (state.filter.nationality === "all" || user.nat === state.filter.nationality) &&
+                                                    (user.name.first.toLowerCase().includes(state.filter.name.toLowerCase()) ||
+                                                      user.name.last.toLowerCase().includes(state.filter.name.toLowerCase())))
+      },
     },
       extraReducers(builder) {
         builder
@@ -51,6 +59,6 @@ const peopleApp = createSlice({
       },
   });
   
-  export const { setName, setNationality, setGender } = peopleApp.actions;
+  export const { setName, setNationality, setGender, setFilteredResult } = peopleApp.actions;
   
   export default peopleApp.reducer;

@@ -14,6 +14,7 @@ const MainAllPeople = () => {
   //call redux state filter and users
   const filter = useSelector((state) => state.people.filter)
   const users = useSelector((state) => state.people.users)
+  const filteredResult = useSelector((state) => state.people.filteredResult)
 
   //define number page state for infinite scroll
   const [page, setPage] = useState(1)
@@ -28,15 +29,6 @@ const MainAllPeople = () => {
     dispatch(getUsers(page))
     setPage(page + 1);
   };
-
-  //filter result with selected filter
-  const filteredUsers = users.filter(
-    (user) =>
-      (filter.gender === "all" || user.gender === filter.gender) &&
-      (filter.nationality === "all" || user.nat === filter.nationality) &&
-      (user.name.first.toLowerCase().includes(filter.name.toLowerCase()) ||
-        user.name.last.toLowerCase().includes(filter.name.toLowerCase()))
-  );
 
   //control if filter are standard show all users data else show only filtered data and disable infinite scroll
   if(filter.gender === "all" && filter.nationality === "all" && filter.name === "") {
@@ -74,7 +66,7 @@ const MainAllPeople = () => {
     return (
       <>
         <Row className="margin">
-          {filteredUsers.map((user) => {
+          {filteredResult.map((user) => {
             return (
               <Col xl={2} md={3} key={nanoid()}>
                 <SinglePersonCard props={user}/>
