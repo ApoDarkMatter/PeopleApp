@@ -11,7 +11,7 @@ const MainAllPeople = () => {
 
   const dispatch = useDispatch()
 
-  //call redux state filter and users
+  //call redux state
   const filter = useSelector((state) => state.people.filter)
   const users = useSelector((state) => state.people.users)
   const filteredResult = useSelector((state) => state.people.filteredResult)
