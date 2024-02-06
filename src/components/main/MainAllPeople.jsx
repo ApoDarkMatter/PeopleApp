@@ -15,8 +15,7 @@ const MainAllPeople = () => {
   const filter = useSelector((state) => state.people.filter)
   const users = useSelector((state) => state.people.users)
   const filteredResult = useSelector((state) => state.people.filteredResult)
-  const page = useSelector((state) => state.people.pageTEMP)
-
+  const page = useSelector((state) => state.people.page)
 
   //fecthData on first run
   useEffect(() => {
